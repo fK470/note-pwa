@@ -21,10 +21,9 @@ const nextConfig = {
 };
 
 const nextConfigFunction = async (phase) => {
-  if (phase === PHASE_DEVELOPMENT_SERVER || phase === PHASE_PRODUCTION_BUILD) {
+  if (phase === PHASE_PRODUCTION_BUILD) {
     const withPWA = (await import('next-pwa')).default({
       dest: 'public',
-      disable: process.env.NODE_ENV === 'development',
     });
     return withPWA(nextConfig);
   }
