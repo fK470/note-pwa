@@ -1,0 +1,18 @@
+{
+  "theme_color": "#8936FF",
+  "background_color": "#2EC6FE",
+  "icons": [
+    { "purpose": "maskable", "sizes": "512x512", "src": "icon512_maskable.png", "type": "image/png" },
+    { "purpose": "any", "sizes": "512x512", "src": "icon512_rounded.png", "type": "image/png" }
+  ],
+  "orientation": "portrait",
+  "display": "standalone",
+  "dir": "auto",
+  "lang": "en",
+  "name": "pNote",
+  "short_name": "pNote",
+  "description": "A lightweight and offline-capable note-taking app built using IndexedDB and PWA technologies. Organize, edit, and access your notes anytime, even without an internet connection. The app is optimized for fast performance and provides a seamless user experience across all devices. Enjoy features like data persistence, real-time syncing, and easy note categorization in a secure and user-friendly interface.",
+  "scope": "https://pnote.vercel.app",
+  "start_url": "https://pnote.vercel.app",
+  "id": "https://pnote.vercel.app"
+}
