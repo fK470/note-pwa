@@ -3,7 +3,7 @@
 import { db } from '@/app/utils/db';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function EditNotePage({ params }: { params: { id: string } }) {
   const noteId = Number(params.id);
@@ -12,15 +12,28 @@ export default function EditNotePage({ params }: { params: { id: string } }) {
     return note;
   }, [noteId]);
 
-  const [title, setTitle] = useState<string | undefined>(note?.title);
-  const [content, setContent] = useState<string | undefined>(note?.content);
+  const [title, setTitle] = useState<string | undefined>(undefined);
+  const [content, setContent] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    if (note) {
+      setTitle(note.title ?? '');
+      setContent(note.content ?? '');
+    }
+  }, [note]);
 
   const router = useRouter();
 
   const handleOnClickUpdate = () => {
-    db.notes.update(noteId, { title: title, content: content });
-    router.push(`/notes`);
+    if (title && content) {
+      db.notes.update(noteId, { title: title, content: content });
+      router.push(`/notes`);
+    }
   };
+
+  if (!note) {
+    return <div>Loading...</div>; // ロード中の状態を表示
+  }
 
   return (
     <div className="container mx-auto p-4">
@@ -30,7 +43,7 @@ export default function EditNotePage({ params }: { params: { id: string } }) {
         <input
           type="text"
           className="w-full p-2 border border-gray-300 rounded"
-          value={title}
+          value={title ?? ''}
           onChange={(e) => setTitle(e.target.value)}
           required
         />
@@ -39,7 +52,7 @@ export default function EditNotePage({ params }: { params: { id: string } }) {
         <label className="block text-gray-700 font-semibold mb-2">Content</label>
         <textarea
           className="w-full p-2 border border-gray-300 rounded"
-          value={content}
+          value={content ?? ''}
           onChange={(e) => setContent(e.target.value)}
           rows={6}
           required
