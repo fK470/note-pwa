@@ -1,9 +1,10 @@
-'use client';
+"use client";
 
-import { db } from '@/app/utils/db';
-import { useLiveQuery } from 'dexie-react-hooks';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useLiveQuery } from "dexie-react-hooks";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import { db } from "@/app/models/db";
 
 export default function NoteDetailPage({ params }: { params: { id: string } }) {
   const noteId = Number(params.id);
@@ -16,7 +17,7 @@ export default function NoteDetailPage({ params }: { params: { id: string } }) {
 
   const handleOnClickDelete = () => {
     db.notes.delete(noteId);
-    router.push('/notes');
+    router.push("/notes");
   };
 
   return (

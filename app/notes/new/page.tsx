@@ -1,30 +1,23 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { db } from '@/app/utils/db';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+import { db } from "@/app/models/db";
 
 export default function NewNotePage() {
-  const [title, setTitle] = useState<string>('');
-  const [content, setContent] = useState<string>('');
-  const [status, setStatus] = useState<string>('');
+  const [note, setNote] = useState({ title: "", content: "" });
+
   const router = useRouter();
 
   const addNote = async () => {
     try {
-      const id = await db.notes.add({
-        title,
-        content,
-      });
-
-      setStatus(`Note ${title} successfully added. Got id ${id}`);
-      setTitle('');
-      setContent('');
-    } catch (error) {
-      setStatus(`Failed to add ${title}: ${error}`);
-      console.log(status);
+      await db.notes.add(note);
+    } catch (err) {
+      console.error(err);
     }
-    router.push('/notes');
+    setNote({ title: "", content: "" });
+    router.push("/notes");
   };
 
   return (
@@ -35,8 +28,8 @@ export default function NewNotePage() {
         <input
           type="text"
           className="w-full p-2 border border-gray-300 rounded"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={note.title}
+          onChange={(e) => setNote({ ...note, title: e.target.value })}
           required
         />
       </div>
@@ -44,14 +37,14 @@ export default function NewNotePage() {
         <label className="block text-gray-700 font-semibold mb-2">Content</label>
         <textarea
           className="w-full p-2 border border-gray-300 rounded"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
+          value={note.content}
+          onChange={(e) => setNote({ ...note, content: e.target.value })}
           rows={6}
           required
         />
       </div>
       <button onClick={addNote} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-        Save Note
+        Save
       </button>
     </div>
   );

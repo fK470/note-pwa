@@ -1,8 +1,9 @@
-'use client';
+"use client";
 
-import { useLiveQuery } from 'dexie-react-hooks';
-import Link from 'next/link';
-import { db } from '../utils/db';
+import { useLiveQuery } from "dexie-react-hooks";
+import Link from "next/link";
+
+import { db } from "../models/db";
 
 export default function NotesPage() {
   const notes = useLiveQuery(() => db.notes.toArray());

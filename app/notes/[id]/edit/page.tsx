@@ -1,9 +1,10 @@
-'use client';
+"use client";
 
-import { db } from '@/app/utils/db';
-import { useLiveQuery } from 'dexie-react-hooks';
-import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useLiveQuery } from "dexie-react-hooks";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+
+import { db } from "@/app/models/db";
 
 export default function EditNotePage({ params }: { params: { id: string } }) {
   const noteId = Number(params.id);
@@ -17,8 +18,8 @@ export default function EditNotePage({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     if (note) {
-      setTitle(note.title ?? '');
-      setContent(note.content ?? '');
+      setTitle(note.title ?? "");
+      setContent(note.content ?? "");
     }
   }, [note]);
 
@@ -43,7 +44,7 @@ export default function EditNotePage({ params }: { params: { id: string } }) {
         <input
           type="text"
           className="w-full p-2 border border-gray-300 rounded"
-          value={title ?? ''}
+          value={title ?? ""}
           onChange={(e) => setTitle(e.target.value)}
           required
         />
@@ -52,7 +53,7 @@ export default function EditNotePage({ params }: { params: { id: string } }) {
         <label className="block text-gray-700 font-semibold mb-2">Content</label>
         <textarea
           className="w-full p-2 border border-gray-300 rounded"
-          value={content ?? ''}
+          value={content ?? ""}
           onChange={(e) => setContent(e.target.value)}
           rows={6}
           required
