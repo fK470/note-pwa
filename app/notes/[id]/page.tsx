@@ -37,7 +37,7 @@ export default function NoteDetailPage({ params }: { params: { id: string } }) {
           </button>
           {isOpen && (
             <ul className="absolute z-10 p-3 bg-slate-200 rounded-lg shadow-lg space-y-2">
-              <li className="pb-2 border-solid border-b border-black">
+              <li className="pb-2 border-solid border-b border-gray ">
                 <Link href={`/notes/${params.id}/edit`}>Edit</Link>
               </li>
               <li className="">
