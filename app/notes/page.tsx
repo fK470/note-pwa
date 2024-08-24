@@ -9,7 +9,7 @@ export default function NotesPage() {
   const notes = useLiveQuery(() => db.notes.toArray());
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="sm:w-full md:w-3/4 lg:w-1/2 mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">My Notes</h1>
       <ul className="space-y-4">
         {notes?.map((note) => (

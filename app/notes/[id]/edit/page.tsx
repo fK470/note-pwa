@@ -37,7 +37,7 @@ export default function EditNotePage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="sm:w-full md:w-3/4 lg:w-1/2 mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Edit Note</h1>
       <div className="mb-4">
         <label className="block text-gray-700 font-semibold mb-2">Title</label>
